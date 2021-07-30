@@ -16,21 +16,26 @@ class Stack {
     return this.top;
   }
   push(value) {
+    const newNode = new Node(value);
     if (this.isEmpty()) {
-      const newNode = new Node(value);
       this.top = newNode;
       this.bottom = newNode;
-      this.length++;
     } else {
-      const newNode = new Node(value);
       newNode.next = this.top;
       this.top = newNode;
-      this.length++;
     }
+    this.length++;
     return this;
   }
   pop() {
+    if (!this.top) {
+      return null;
+    }
+    if (this.length === 1) {
+      this.bottom = null;
+    }
     this.top = this.top.next;
+    this.length--;
     return this;
   }
   isEmpty() {
@@ -43,8 +48,9 @@ myStack.push("google");
 myStack.push("Udemy");
 myStack.push("Discord");
 myStack.pop();
-myStack.peek();
-// console.log(myStack);
+myStack.pop();
+myStack.pop();
+console.log(myStack);
 //Discord
 //Udemy
 //google
